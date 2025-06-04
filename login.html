@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول / إنشاء حساب - كِفَاء</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mark.js/dist/mark.min.js"></script>
+
+    <style>
+	/* ====== لا يوجد تغيير في الـ CSS الأصلي ==== */
+	html {
+	    box-sizing: border-box;
+	}
+	*, *:before, *:after {
+	    box-sizing: inherit;
+	}
+	body {
+	    font-family: 'Cairo', sans-serif;
+	    margin: 0;
+	    padding: 0;
+	    background-color: #f4f4f4;
+	    color: #333;
+	    font-size: 100%;
+	}
+	header {
+	    background-color: #035352;
+	    padding: 0.9375em 3.125em;
+	    display: flex;
+	    justify-content: space-between;
+	    align-items: center;
+	}
+	header img {
+	    height: 4.375em;
+	}
+	nav ul {
+	    list-style: none;
+	    padding: 0;
+	    margin: 0;
+	    display: flex;
+	    align-items: center;
+	}
+	nav ul li {
+	    margin: 0 1.875em;
+	}
+	nav ul li a {
+	    color: white;
+	    text-decoration: none;
+	    font-size: 1.125em;
+	}
+	nav ul li a:hover,
+	nav ul li a:focus,
+	nav ul li a:active {
+	    color: #bfcfb2;
+	    text-decoration: none !important;
+	}
+	a {
+	    text-decoration: none !important;
+	    color: inherit;
+	}
+	a:hover, a:focus, a:active {
+	    text-decoration: none !important;
+	}
+	.container {
+	    width: 40%;
+	    background: white;
+	    padding: 1.875em;
+	    margin: 3.125em auto;
+	    border-radius: 0.625em;
+	    box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.2);
+	    text-align: center;
+	}
+	.container h2 {
+	    margin-bottom: 1.25em;
+	}
+	.input-group {
+	    text-align: right;
+	    margin-bottom: 0.9375em;
+	}
+	.input-group label {
+	    display: block;
+	    margin-bottom: 0.3125em;
+	    font-weight: bold;
+	}
+	.input-group input, 
+	.input-group select {
+	    width: 100%;
+	    padding: 0.75em;
+	    border: 0.0625em solid #ccc;
+	    border-radius: 0.5em;
+	    font-size: 1em;
+	    box-sizing: border-box;
+	}
+	.btn {
+	    width: 100%;
+	    background-color: #028484;
+	    color: white;
+	    padding: 0.75em;
+	    border: none;
+	    border-radius: 0.5em;
+	    cursor: pointer;
+	    font-size: 1.125em;
+	}
+	.btn:hover {
+	    background-color: #035352;
+	}
+	.toggle-link {
+	    margin-top: 0.625em;
+	    display: block;
+	    color: #035352;
+	    cursor: pointer;
+	}
+	footer {
+	    background-color: #035352;
+	    color: white;
+	    text-align: center;
+	    padding: 1.25em 3.125em;
+	    display: flex;
+	    flex-direction: column;
+	    align-items: center;
+	}
+	.footer-sections {
+	    display: flex;
+	    justify-content: space-between;
+	    width: 100%;
+	}
+	.footer-section {
+	    max-width: 18.75em;
+	}
+	.footer-section h3 {
+	    margin-bottom: 0.625em;
+	}
+	.newsletter {
+	    display: flex;
+	    flex-direction: column;
+	}
+	.newsletter input {
+	    padding: 0.5em;
+	    margin-bottom: 0.625em;
+	    border: none;
+	    border-radius: 0.25em;
+	}
+	.newsletter button {
+	    padding: 0.5em;
+	    background-color: #028484;
+	    color: white;
+	    border: none;
+	    border-radius: 0.25em;
+	    cursor: pointer;
+	}
+	.search-box {
+	    display: none;
+	    position: absolute;
+	    top: 5em;
+	    left: 50%;
+	    transform: translateX(-50%);
+	    background: white;
+	    padding: 0.625em 0.9375em;
+	    border-radius: 1.5625em;
+	    box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.2);
+	    width: 20em;
+	    display: flex;
+	    align-items: center;
+	    gap: 0.625em;
+	    border: 0.0625em solid #ccc;
+	    transition: opacity 0.3s ease, transform 0.3s ease;
+	    opacity: 0;
+	    visibility: hidden;
+	    z-index: 1000;
+	}
+	.search-box input {
+	    flex: 1;
+	    padding: 0.75em;
+	    border: none;
+	    border-radius: 1.25em;
+	    font-size: 1em;
+	    outline: none;
+	    background: #f9f9f9;
+	}
+	.search-box button {
+	    background: #035352;
+	    color: white;
+	    border: none;
+	    padding: 0.625em;
+	    border-radius: 50%;
+	    cursor: pointer;
+	    font-size: 1em;
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    width: 2.5em;
+	    height: 2.5em;
+	}
+	.search-box button:hover {
+	    background: #028484;
+	}
+        .first-match {
+    background-color: yellow;
+}
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="logo.png" alt="كِفَاء">
+        <nav>
+            <ul>
+                <li><a href="index.php">الرئيسية</a></li>
+                <li><a href="about.php">من نحن</a></li>
+                <li><a href="trading.php">التبادل</a></li>
+				<li class="icon-group">
+    <a href="profile.php"><img src="user-icon.png" style="width: 30px; height: 30px;" alt="الملف الشخصي"></a>
+    <img src="search-icon.png" id="searchIcon" class="search-icon" style="width: 25px; height: 25px;" alt="بحث">
+</li>
+                <li><a href="login.html" class="login-btn">تسجيل الدخول/إنشاء حساب</a></li>
+            </ul>
+        </nav>
+    </header>
+	
+    <div id="searchBarContainer" class="search-box">
+        <input type="text" id="searchInput" placeholder="ابحث عن المنتجات أو الخدمات...">
+        <button onclick="performSearch()">🔍</button>
+    </div>
+
+    <div class="container">
+        <h2 id="formTitle">تسجيل الدخول</h2>
+        
+        <!-- ✅ FORM LOGIN ALLOWS EMAIL OR PHONE -->
+<form id="loginForm" method="POST" action="login.php">
+            <div class="input-group">
+                <label for="emailOrPhone">البريد الإلكتروني أو رقم الجوال:</label>
+                <!-- استبدلنا type='email' بtype='text' للسماح بالبريد أو رقم الجوال -->
+                <input type="text" id="emailOrPhone" name="emailOrPhone" required>
+            </div>
+            <div class="input-group">
+                <label for="password">كلمة المرور:</label>
+                <input type="password" id="password" name="password" required minlength="8">
+            </div>
+            <button type="submit" class="btn">تسجيل الدخول</button>
+            <p class="toggle-link" onclick="toggleForm()">ليس لديك حساب؟ أنشئ حساب الآن</p>
+        </form>
+
+<form id="signupForm" method="POST" action="signup.php" style="display: none;">
+            <div class="input-group">
+                <label for="name">الاسم:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="input-group">
+                <label for="age">العمر:</label>
+                <input type="number" id="age" name="age" min="18" required placeholder="يجب أن يكون 18 سنة فأكثر">
+            </div>
+            <div class="input-group">
+                <label for="gender">الجنس:</label>
+                <select id="gender" name="gender" required>
+                    <option value="ذكر">ذكر</option>
+                    <option value="أنثى">أنثى</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="city">المدينة:</label>
+                <select id="city" name="city" required>
+                    <option value="الرياض">الرياض</option>
+                    <option value="جدة">جدة</option>
+                    <option value="الدمام">الدمام</option>
+                    <option value="مكة">مكة</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="phone">رقم الهاتف:</label>
+                <input type="text" id="phone" name="phone" pattern="\d{10}" required placeholder="أدخل 10 أرقام">
+            </div>
+            <div class="input-group">
+                <label for="signupEmail">البريد الإلكتروني:</label>
+                <input type="email" id="signupEmail" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="signupPassword">كلمة المرور:</label>
+                <input type="password" id="signupPassword" name="password" required minlength="8">
+            </div>
+            <button type="submit" class="btn">إنشاء حساب</button>
+            <p class="toggle-link" onclick="toggleForm()">لديك حساب بالفعل؟ تسجيل الدخول</p>
+        </form>
+    </div>
+
+    <footer>
+        <div class="footer-sections">
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <p><a href='index.php'>الرئيسية</a> | <a href='about.php'>من نحن</a> | <a href='trading.php'>التبادل</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>انضم إلينا</h3>
+                <p>اشترك في نشرتنا الإخبارية لمتابعة آخر العروض.</p>
+				<div class="newsletter">
+    <input type="email" placeholder="بريدك الإلكتروني" id="newsletterEmail">
+    <button onclick="subscribeNews()">اشترك</button>
+</div>
+
+            </div>
+            <div class="footer-section">
+                <h3>تواصل معنا</h3>
+                <p>الرياض، المملكة العربية السعودية</p>
+                <p>📞 010-020-0340</p>
+                <p>📧 info@kafaa.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleForm() {
+            let loginForm = document.getElementById("loginForm");
+            let signupForm = document.getElementById("signupForm");
+            let formTitle = document.getElementById("formTitle");
+
+            if (loginForm.style.display === "none") {
+                loginForm.style.display = "block";
+                signupForm.style.display = "none";
+                formTitle.innerText = "تسجيل الدخول";
+            } else {
+                loginForm.style.display = "none";
+                signupForm.style.display = "block";
+                formTitle.innerText = "إنشاء حساب";
+            }
+        }
+
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            let age = document.getElementById("age").value;
+            if (age < 18) {
+                alert("يجب أن يكون العمر 18 سنة فأكثر");
+                event.preventDefault();
+            }
+
+            let phone = document.getElementById("phone").value;
+            let phonePattern = /^\d{10}$/;
+            if (!phonePattern.test(phone)) {
+                alert("يجب أن يكون رقم الهاتف 10 أرقام فقط");
+                event.preventDefault();
+            }
+
+            let password = document.getElementById("signupPassword").value;
+            if (password.length < 8) {
+                alert("يجب أن تكون كلمة المرور 8 أحرف على الأقل");
+                event.preventDefault();
+            }
+        });
+		
+        // تسجيل الدخول عبر (البريد OR الهاتف) + كلمة مرور
+        document.getElementById("loginForm").addEventListener("submit", function(event){
+            let emailOrPhone = document.getElementById("emailOrPhone").value.trim();
+            let password = document.getElementById("password").value.trim();
+            
+            // نتأكد من أن كلمة المرور >= 8
+            if(password.length < 8){
+                alert("يجب أن تكون كلمة المرور 8 أحرف على الأقل");
+                event.preventDefault();
+                return;
+            }
+            
+            // نمط بسيط للبريد الإلكتروني
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            // نمط لـ 10 أرقام
+            let phonePattern = /^\d{10}$/;
+            
+            // تحقق إن كان الإدخال بريد أم رقم جوال
+            if( emailPattern.test(emailOrPhone) ){
+                // إدخال بريد إلكتروني صالح
+                alert("تسجيل الدخول عبر البريد الإلكتروني: " + emailOrPhone);
+                // هنا تنفيذ عملية تسجيل الدخول
+            } 
+            else if( phonePattern.test(emailOrPhone) ){
+                // إدخال رقم هاتف صالح
+                alert("تسجيل الدخول عبر رقم الهاتف: " + emailOrPhone);
+                // تنفيذ تسجيل الدخول عبر الهاتف
+            } 
+            else {
+                // لا هو بريد ولا رقم جوال
+                alert("الرجاء إدخال بريد إلكتروني صحيح أو رقم جوال من 10 أرقام");
+                event.preventDefault();
+            }
+        });
+
+        document.getElementById("searchIcon").addEventListener("click", function () {
+            let searchBar = document.getElementById("searchBarContainer");
+            searchBar.style.opacity = (searchBar.style.opacity === "0" || searchBar.style.opacity === "") ? "1" : "0";
+            searchBar.style.visibility = (searchBar.style.visibility === "hidden" || searchBar.style.visibility === "") ? "visible" : "hidden";
+        });
+
+      function performSearch() {
+    let query = document.getElementById("searchInput").value.trim();
+    if (query === "") {
+        alert("الرجاء إدخال كلمة للبحث.");
+        return;
+    }
+    
+    // نحدد السياق الذي سيتم البحث فيه، هنا نستخدم body لكن يمكنك تغييره إذا أردت
+    let context = document.querySelector("body");
+    let markInstance = new Mark(context);
+    
+    // إزالة التحديدات السابقة
+    markInstance.unmark({
+        done: function() {
+            // تحديد النصوص المطابقة
+            markInstance.mark(query, {
+                "each": function(element) {
+                    // إذا لم يتم تحديد أول نتيجة بعد، قم بتحديدها وتمرير المستخدم إليها
+                    if (!document.querySelector(".first-match")) {
+                        element.classList.add("first-match");
+                        element.scrollIntoView({ behavior: "smooth", block: "center" });
+                    }
+                }
+            });
+        }
+    });
+}
+		
+		function subscribeNews() {
+        let emailInput = document.getElementById("newsletterEmail");
+        let emailValue = emailInput.value.trim();
+
+        let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailPattern.test(emailValue)) {
+            alert("الرجاء إدخال بريد إلكتروني صحيح!");
+            return;
+        }
+
+        alert("تم الاشتراك بنجاح في النشرة الإخبارية!");
+        emailInput.value = "";
+    }
+    </script>
+
+</body>
+</html>
